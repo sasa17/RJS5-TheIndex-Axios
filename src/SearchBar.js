@@ -6,7 +6,6 @@ const SearchBar = props => {
   const handleChange = event => {
     props.filterAuthors(event.target.value);
   };
-
   return (
     <div className="form-group col-lg-6 col-12 mx-auto">
       <div className="input-group my-3">
