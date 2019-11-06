@@ -9,35 +9,18 @@ import AuthorDetail from "./AuthorDetail";
 
 class App extends Component {
   state = {
-    currentAuthor: null,
-    filteredAuthors: authors
+    currentAuthor: null
   };
 
   selectAuthor = author => this.setState({ currentAuthor: author });
 
   unselectAuthor = () => this.setState({ currentAuthor: null });
 
-  filterAuthors = query => {
-    query = query.toLowerCase();
-    let filteredAuthors = authors.filter(author => {
-      return `${author.first_name} ${author.last_name}`
-        .toLowerCase()
-        .includes(query);
-    });
-    this.setState({ filteredAuthors: filteredAuthors });
-  };
-
   getContentView = () => {
     if (this.state.currentAuthor) {
       return <AuthorDetail author={this.state.currentAuthor} />;
     } else {
-      return (
-        <AuthorsList
-          authors={this.state.filteredAuthors}
-          selectAuthor={this.selectAuthor}
-          filterAuthors={this.filterAuthors}
-        />
-      );
+      return <AuthorsList authors={authors} selectAuthor={this.selectAuthor} />;
     }
   };
 
