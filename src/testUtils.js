@@ -3,10 +3,17 @@ import casual from "casual";
 casual.seed(555);
 
 export const fakeBookId = () => casual.integer(0, 30);
+
 export const fakeBook = overrides => ({
   id: casual.integer(0, 30),
   title: casual.title,
   color: casual.color_name,
+  authors: [
+    {
+      name: casual.name,
+      id: casual.integer(0, 30)
+    }
+  ],
   ...overrides
 });
 

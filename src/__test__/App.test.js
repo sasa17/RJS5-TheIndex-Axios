@@ -8,7 +8,7 @@ import App from "../App";
 
 //Mocks
 import mockAxios from "axios";
-import { fakeAuthor, fakeAuthorDetail } from "../testUtils";
+import { fakeAuthor } from "../testUtils";
 
 describe("<App />", () => {
   afterEach(() => {
@@ -43,7 +43,7 @@ describe("<App />", () => {
       await wait();
       wrapper.update();
       expect(mockAxios.get).toHaveBeenCalledWith(
-        "https://the-index-api.herokuapp.com/api/authors"
+        "https://the-index-api.herokuapp.com/api/authors/"
       );
     });
 
@@ -92,8 +92,8 @@ describe("<App />", () => {
   describe("When a card is clicked", () => {
     it("makes a GET request", async () => {
       const wrapper = mount(<App />);
-      const authors = [fakeAuthor(), fakeAuthor(), fakeAuthor()];
-      wrapper.setState({ authors, loading: false });
+      await wait();
+      wrapper.update();
       const card = wrapper.find(".card").at(0);
       card.simulate("click");
       await wait();
@@ -103,24 +103,27 @@ describe("<App />", () => {
 
     it("makes the request to the correct url", async () => {
       const wrapper = mount(<App />);
-      const authors = [fakeAuthor(), fakeAuthor(), fakeAuthor()];
-      wrapper.setState({ authors, loading: false });
+      await wait();
+      wrapper.update();
       const card = wrapper.find(".card").at(0);
       card.simulate("click");
       await wait();
       wrapper.update();
       expect(mockAxios.get).toHaveBeenCalledWith(
-        `https://the-index-api.herokuapp.com/api/authors/${authors[0].id}/`
+        `https://the-index-api.herokuapp.com/api/authors/10/`
       );
     });
 
     it("changes the loading state to true, then false after the axios request", async () => {
       const wrapper = mount(<App />);
-      const authors = [fakeAuthor(), fakeAuthor(), fakeAuthor()];
-      wrapper.setState({ authors, loading: false });
+      await wait();
+      wrapper.update();
       const card = wrapper.find(".card").at(0);
       card.simulate("click");
       expect(wrapper.state().loading).toBe(true);
+      await wait();
+      wrapper.update();
+      expect(wrapper.state().loading).toBe(false);
     });
   });
 });
