@@ -8,7 +8,7 @@ import App from "../App";
 
 //Mocks
 import mockAxios from "axios";
-import { fakeAuthor } from "../testUtils";
+import { fakeAuthor, fakeAuthorDetail } from "../testUtils";
 
 describe("<App />", () => {
   afterEach(() => {
@@ -86,6 +86,41 @@ describe("<App />", () => {
       wrapper.update();
       expect(wrapper.find("Loading").exists()).toBe(false);
       expect(wrapper.find("AuthorsList").exists()).toBe(true);
+    });
+  });
+
+  describe("When a card is clicked", () => {
+    it("makes a GET request", async () => {
+      const wrapper = mount(<App />);
+      const authors = [fakeAuthor(), fakeAuthor(), fakeAuthor()];
+      wrapper.setState({ authors, loading: false });
+      const card = wrapper.find(".card").at(0);
+      card.simulate("click");
+      await wait();
+      wrapper.update();
+      expect(mockAxios.get).toHaveBeenCalledTimes(2);
+    });
+
+    it("makes the request to the correct url", async () => {
+      const wrapper = mount(<App />);
+      const authors = [fakeAuthor(), fakeAuthor(), fakeAuthor()];
+      wrapper.setState({ authors, loading: false });
+      const card = wrapper.find(".card").at(0);
+      card.simulate("click");
+      await wait();
+      wrapper.update();
+      expect(mockAxios.get).toHaveBeenCalledWith(
+        `https://the-index-api.herokuapp.com/api/authors/${authors[0].id}/`
+      );
+    });
+
+    it("changes the loading state to true, then false after the axios request", async () => {
+      const wrapper = mount(<App />);
+      const authors = [fakeAuthor(), fakeAuthor(), fakeAuthor()];
+      wrapper.setState({ authors, loading: false });
+      const card = wrapper.find(".card").at(0);
+      card.simulate("click");
+      expect(wrapper.state().loading).toBe(true);
     });
   });
 });

@@ -2,17 +2,29 @@ import casual from "casual";
 
 casual.seed(555);
 
+export const fakeBookId = () => casual.integer(0, 30);
 export const fakeBook = overrides => ({
+  id: casual.integer(0, 30),
   title: casual.title,
   color: casual.color_name,
   ...overrides
 });
 
 export const fakeAuthor = overrides => ({
+  id: casual.integer(0, 30),
   first_name: casual.first_name,
   last_name: casual.last_name,
   imageUrl: casual.url,
-  books: Array.from({ length: Math.floor(Math.random * 20) }, () => fakeBook()),
+  books: [fakeBookId(), fakeBookId(), fakeBookId()],
+  ...overrides
+});
+
+export const fakeAuthorDetail = overrides => ({
+  id: casual.integer(0, 30),
+  first_name: casual.first_name,
+  last_name: casual.last_name,
+  imageUrl: casual.url,
+  books: [fakeBook(), fakeBook(), fakeBook()],
   ...overrides
 });
 

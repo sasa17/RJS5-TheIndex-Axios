@@ -26,7 +26,18 @@ class App extends Component {
     }
   };
 
-  selectAuthor = author => this.setState({ currentAuthor: author });
+  selectAuthor = async author => {
+    this.setState({ loading: true });
+    try {
+      let response = await axios.get(
+        `https://the-index-api.herokuapp.com/api/authors/${author.id}/`
+      );
+      let authorDetail = response.data;
+      this.setState({ currentAuthor: authorDetail, loading: false });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   unselectAuthor = () => this.setState({ currentAuthor: null });
 
