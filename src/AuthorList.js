@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import AuthorCard from "./AuthorCard";
 import SearchBar from "./SearchBar";
 
-class AuthorsList extends Component {
+class AuthorList extends Component {
   state = {
     filteredAuthors: this.props.authors
   };
@@ -36,4 +36,4 @@ class AuthorsList extends Component {
   }
 }
 
-export default AuthorsList;
+export default AuthorList;

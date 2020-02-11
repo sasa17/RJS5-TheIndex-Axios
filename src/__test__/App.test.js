@@ -77,7 +77,7 @@ describe("<App />", () => {
 
     it("replaces the entire author list while authors are being fetched", () => {
       const wrapper = mount(<App />);
-      expect(wrapper.find("AuthorsList").exists()).toBe(false);
+      expect(wrapper.find("AuthorList").exists()).toBe(false);
     });
 
     it("is NOT rendered after the authors are fetched", async () => {
@@ -85,7 +85,7 @@ describe("<App />", () => {
       await wait();
       wrapper.update();
       expect(wrapper.find("Loading").exists()).toBe(false);
-      expect(wrapper.find("AuthorsList").exists()).toBe(true);
+      expect(wrapper.find("AuthorList").exists()).toBe(true);
     });
   });
 

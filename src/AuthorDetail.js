@@ -1,7 +1,7 @@
 import React from "react";
 import BookRow from "./BookRow";
 
-function AuthorDetail(props) {
+const AuthorDetail = props => {
   const author = props.author;
   const authorName = `${author.first_name} ${author.last_name}`;
 
@@ -27,6 +27,6 @@ function AuthorDetail(props) {
       </table>
     </div>
   );
-}
+};
 
 export default AuthorDetail;

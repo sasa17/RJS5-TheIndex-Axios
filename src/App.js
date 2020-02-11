@@ -4,7 +4,7 @@ import authors from "./data.js";
 
 // Components
 import Sidebar from "./Sidebar";
-import AuthorsList from "./AuthorsList";
+import AuthorList from "./AuthorList";
 import AuthorDetail from "./AuthorDetail";
 
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
     if (this.state.currentAuthor) {
       return <AuthorDetail author={this.state.currentAuthor} />;
     } else {
-      return <AuthorsList authors={authors} selectAuthor={this.selectAuthor} />;
+      return <AuthorList authors={authors} selectAuthor={this.selectAuthor} />;
     }
   };
 
